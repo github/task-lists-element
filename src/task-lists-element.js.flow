@@ -1,0 +1,12 @@
+/* @flow */
+
+declare class TaskListsElement extends HTMLElement {
+  get disabled(): boolean;
+  set disabled(value: boolean): void;
+  get sortable(): boolean;
+  set sortable(value: boolean): void;
+}
+
+declare module '@github/task-lists-element' {
+  declare export default typeof TaskListsElement
+}
