@@ -11,6 +11,7 @@ export default class TaskListsElement extends HTMLElement {
     this.addEventListener('change', event => {
       const checkbox = event.target
       if (!(checkbox instanceof HTMLInputElement)) return
+      if (!checkbox.classList.contains('task-list-item-checkbox')) return
 
       this.dispatchEvent(
         new CustomEvent('task-lists:check', {
