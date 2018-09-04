@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- <script type="text/javascript" src="../dist/index.umd.js"></script> -->
+  <script type="text/javascript" src="https://unpkg.com/@github/task-lists-element@latest"></script>
+  <title>task-lists-element demo</title>
+</head>
+<body>
+  <task-lists sortable>
+    <ul class="contains-task-list">
+      <li class="task-list-item">
+        <label>
+          <input type="checkbox" class="task-list-item-checkbox">
+          Hubot
+        </label>
+      </li>
+      <li class="task-list-item">
+        <label>
+          <input type="checkbox" class="task-list-item-checkbox">
+          Bender
+        </label>
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        Nested
+
+        <ul class="contains-task-list">
+          <li class="task-list-item">
+            <label>
+              <input type="checkbox" class="task-list-item-checkbox">
+              WALL-E
+            </label>
+          </li>
+          <li class="task-list-item">
+            <label>
+              <input type="checkbox" class="task-list-item-checkbox">
+              BB-8
+            </label>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </task-lists>
+</body>
+</html>
