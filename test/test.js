@@ -34,6 +34,15 @@ describe('task-lists element', function() {
               <input id="wall-e" type="checkbox" class="task-list-item-checkbox"> WALL-E
             </li>
           </ul>
+          <ul>
+            <li>
+              <ul class="contains-task-list">
+                <li class="task-list-item">
+                  <input id="baymax" type="checkbox" class="task-list-item-checkbox"> Baymax
+                </li>
+              </ul>
+            </li>
+          </ul>
         </task-lists>`
       document.body.append(container)
     })
@@ -54,6 +63,24 @@ describe('task-lists element', function() {
       })
 
       const checkbox = document.querySelector('#wall-e')
+      checkbox.checked = true
+      checkbox.dispatchEvent(new CustomEvent('change', {bubbles: true}))
+
+      assert(called)
+    })
+
+    it('emits check event with the right position for nested task list item', function() {
+      let called = false
+
+      const list = document.querySelector('task-lists')
+      list.addEventListener('task-lists:check', function(event) {
+        called = true
+        const {position, checked} = event.detail
+        assert.deepEqual(position, [3, 0])
+        assert(checked)
+      })
+
+      const checkbox = document.querySelector('#baymax')
       checkbox.checked = true
       checkbox.dispatchEvent(new CustomEvent('change', {bubbles: true}))
 
