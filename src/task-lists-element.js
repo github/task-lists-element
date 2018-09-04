@@ -187,9 +187,9 @@ function syncDisabled(list: TaskListsElement) {
 // lists in the container, not just task lists, are indexed to match the
 // server-side Markdown parser's indexing.
 function listIndex(list: Element): number {
-  const container = list.parentElement
+  const container = list.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  const top = Array.from(container.children).filter(el => el.nodeName === 'OL' || el.nodeName === 'UL')
+  const top = Array.from(container.querySelectorAll('ol, ul'))
   return top.indexOf(list)
 }
 
