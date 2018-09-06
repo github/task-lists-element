@@ -34,15 +34,29 @@ describe('task-lists element', function() {
               <input id="wall-e" type="checkbox" class="task-list-item-checkbox"> WALL-E
             </li>
           </ul>
-          <ul>
+
+          <ol>
             <li>
+              Nested
               <ul class="contains-task-list">
                 <li class="task-list-item">
-                  <input id="baymax" type="checkbox" class="task-list-item-checkbox"> Baymax
+                  <label>
+                    <input type="checkbox" class="task-list-item-checkbox">
+                    R2-D2
+                  </label>
+
+                  <ul class="contains-task-list">
+                    <li class="task-list-item">
+                      <label>
+                        <input id="baymax" type="checkbox" class="task-list-item-checkbox">
+                        Baymax
+                      </label>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
-          </ul>
+          </ol>
         </task-lists>`
       document.body.append(container)
     })
@@ -76,7 +90,7 @@ describe('task-lists element', function() {
       list.addEventListener('task-lists:check', function(event) {
         called = true
         const {position, checked} = event.detail
-        assert.deepEqual(position, [3, 0])
+        assert.deepEqual(position, [4, 0])
         assert(checked)
       })
 

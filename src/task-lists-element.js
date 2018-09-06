@@ -136,12 +136,10 @@ function onListItemMouseOut(event: MouseEvent) {
 }
 
 // Returns the list item position as a (list index, item index) tuple.
-// Listen on top-level task lists because item indexing includes nested task lists.
-function position(el: Element): [number, number] {
-  const list = rootTaskList(el)
+function position(checkbox: HTMLInputElement): [number, number] {
+  const list = taskList(checkbox)
   if (!list) throw new Error('.contains-task-list not found')
-  const flattened = Array.from(list.querySelectorAll('li'))
-  const index = flattened.indexOf(el.closest('.task-list-item'))
+  const index = Array.from(list.children).indexOf(checkbox.closest('.task-list-item'))
   return [listIndex(list), index]
 }
 
