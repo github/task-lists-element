@@ -187,8 +187,7 @@ function syncDisabled(list: TaskListsElement) {
 function listIndex(list: Element): number {
   const container = list.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  const top = Array.from(container.querySelectorAll('ol, ul'))
-  return top.indexOf(list)
+  return Array.from(container.querySelectorAll('ol, ul')).indexOf(list)
 }
 
 function onSorted({src, dst}) {
