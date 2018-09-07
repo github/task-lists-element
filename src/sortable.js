@@ -1,6 +1,7 @@
 /* @flow */
 
-type SortHandler = ({
+type SortStartHandler = (srcList: Element) => mixed
+type SortEndHandler = ({
   src: {list: Element, index: number},
   dst: {list: Element, index: number}
 }) => mixed
@@ -21,8 +22,8 @@ export function isDragging(): boolean {
   return !!state
 }
 
-export function sortable(el: Element, fn: SortHandler) {
-  sortHandlers.set(el, fn)
+export function sortable(el: Element, sortStarted: SortStartHandler, sortFinished: SortEndHandler) {
+  sortHandlers.set(el, {sortStarted, sortFinished})
   el.addEventListener('dragstart', onDragStart)
   el.addEventListener('dragenter', onDragEnter)
   el.addEventListener('dragend', onDragEnd)
@@ -66,6 +67,11 @@ function onDragStart(event: DragEvent) {
   if (!target.parentElement) return
   const siblings = Array.from(target.parentElement.children)
   const sourceIndex = siblings.indexOf(target)
+
+  const handlers = sortHandlers.get(target)
+  if (handlers) {
+    handlers.sortStarted(sourceList)
+  }
 
   state = {
     didDrop: false,
@@ -136,8 +142,10 @@ function onDrop(event: DragEvent) {
 
   const src = {list: state.sourceList, index: state.sourceIndex}
   const dst = {list: currentList, index: newIndex}
-  const fn = sortHandlers.get(state.dragging)
-  if (fn) fn({src, dst})
+  const handlers = sortHandlers.get(state.dragging)
+  if (handlers) {
+    handlers.sortFinished({src, dst})
+  }
 }
 
 function onDragEnd() {

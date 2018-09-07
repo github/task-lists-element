@@ -110,7 +110,7 @@ function initItem(el: HTMLElement) {
   handle.addEventListener('mouseenter', onHandleMouseOver)
   handle.addEventListener('mouseleave', onHandleMouseOut)
 
-  sortable(el, onSorted)
+  sortable(el, onSortStart, onSorted)
 
   // Drag operations don't remove :hover styles, so manage drag handle hover state.
   el.addEventListener('mouseenter', onListItemMouseOver)
@@ -190,16 +190,27 @@ function listIndex(list: Element): number {
   return Array.from(container.querySelectorAll('ol, ul')).indexOf(list)
 }
 
+const originalLists = new WeakMap()
+
+function onSortStart(srcList: Element) {
+  const container = srcList.closest('task-lists')
+  if (!container) throw new Error('parent not found')
+  originalLists.set(container, Array.from(container.querySelectorAll('ol, ul')))
+}
+
 function onSorted({src, dst}) {
   const container = src.list.closest('task-lists')
   if (!container) return
+
+  const lists = originalLists.get(container)
+  if (!lists) return
 
   container.dispatchEvent(
     new CustomEvent('task-lists:move', {
       bubbles: true,
       detail: {
-        src: [listIndex(src.list), src.index],
-        dst: [listIndex(dst.list), dst.index]
+        src: [lists.indexOf(src.list), src.index],
+        dst: [lists.indexOf(dst.list), dst.index]
       }
     })
   )
