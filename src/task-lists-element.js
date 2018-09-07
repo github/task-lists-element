@@ -204,6 +204,7 @@ function onSorted({src, dst}) {
 
   const lists = originalLists.get(container)
   if (!lists) return
+  originalLists.delete(container)
 
   container.dispatchEvent(
     new CustomEvent('task-lists:move', {
