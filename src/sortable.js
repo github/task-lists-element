@@ -120,6 +120,9 @@ function onDrop(event: DragEvent) {
   // Allow dragging task list item, not text, links, or files.
   if (!state) return
 
+  event.preventDefault()
+  event.stopPropagation()
+
   const dropzone = event.currentTarget
   if (!(dropzone instanceof Element)) return
 
