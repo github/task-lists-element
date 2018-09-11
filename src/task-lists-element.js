@@ -110,7 +110,7 @@ function initItem(el: HTMLElement) {
   handle.addEventListener('mouseenter', onHandleMouseOver)
   handle.addEventListener('mouseleave', onHandleMouseOut)
 
-  sortable(el, onSorted)
+  sortable(el, onSortStart, onSorted)
 
   // Drag operations don't remove :hover styles, so manage drag handle hover state.
   el.addEventListener('mouseenter', onListItemMouseOver)
@@ -136,12 +136,10 @@ function onListItemMouseOut(event: MouseEvent) {
 }
 
 // Returns the list item position as a (list index, item index) tuple.
-// Listen on top-level task lists because item indexing includes nested task lists.
-function position(el: Element): [number, number] {
-  const list = rootTaskList(el)
+function position(checkbox: HTMLInputElement): [number, number] {
+  const list = taskList(checkbox)
   if (!list) throw new Error('.contains-task-list not found')
-  const flattened = Array.from(list.querySelectorAll('li'))
-  const index = flattened.indexOf(el.closest('.task-list-item'))
+  const index = Array.from(list.children).indexOf(checkbox.closest('.task-list-item'))
   return [listIndex(list), index]
 }
 
@@ -187,22 +185,33 @@ function syncDisabled(list: TaskListsElement) {
 // lists in the container, not just task lists, are indexed to match the
 // server-side Markdown parser's indexing.
 function listIndex(list: Element): number {
-  const container = list.parentElement
+  const container = list.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  const top = Array.from(container.children).filter(el => el.nodeName === 'OL' || el.nodeName === 'UL')
-  return top.indexOf(list)
+  return Array.from(container.querySelectorAll('ol, ul')).indexOf(list)
+}
+
+const originalLists = new WeakMap()
+
+function onSortStart(srcList: Element) {
+  const container = srcList.closest('task-lists')
+  if (!container) throw new Error('parent not found')
+  originalLists.set(container, Array.from(container.querySelectorAll('ol, ul')))
 }
 
 function onSorted({src, dst}) {
   const container = src.list.closest('task-lists')
   if (!container) return
 
+  const lists = originalLists.get(container)
+  if (!lists) return
+  originalLists.delete(container)
+
   container.dispatchEvent(
     new CustomEvent('task-lists:move', {
       bubbles: true,
       detail: {
-        src: [listIndex(src.list), src.index],
-        dst: [listIndex(dst.list), dst.index]
+        src: [lists.indexOf(src.list), src.index],
+        dst: [lists.indexOf(dst.list), dst.index]
       }
     })
   )
