@@ -61,7 +61,8 @@ function onDragStart(event: DragEvent) {
 
   // Add data to drag operation (required for Firefox).
   if (event.dataTransfer) {
-    event.dataTransfer.setData('text/plain', target.textContent.trim())
+    // Use text instead of text/plain for IE11 support
+    event.dataTransfer.setData('text', target.textContent.trim())
   }
 
   if (!target.parentElement) return
