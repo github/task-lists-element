@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 declare class TaskListsElement extends HTMLElement {
   get disabled(): boolean;
