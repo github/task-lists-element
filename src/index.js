@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 import TaskListsElement from './task-lists-element'
 export {TaskListsElement as default}

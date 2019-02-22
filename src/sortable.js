@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow strict */
 
 type SortStartHandler = (srcList: Element) => mixed
 type SortEndHandler = ({
