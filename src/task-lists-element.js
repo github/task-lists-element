@@ -14,8 +14,7 @@ export default class TaskListsElement extends HTMLElement {
       if (!checkbox.classList.contains('task-list-item-checkbox')) return
 
       this.dispatchEvent(
-        new CustomEvent('task-lists:check', {
-          bubbles: true,
+        new CustomEvent('task-lists-check', {
           detail: {
             position: position(checkbox),
             checked: checkbox.checked
@@ -207,8 +206,7 @@ function onSorted({src, dst}) {
   originalLists.delete(container)
 
   container.dispatchEvent(
-    new CustomEvent('task-lists:move', {
-      bubbles: true,
+    new CustomEvent('task-lists-move', {
       detail: {
         src: [lists.indexOf(src.list), src.index],
         dst: [lists.indexOf(dst.list), dst.index]
