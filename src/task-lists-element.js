@@ -15,6 +15,7 @@ export default class TaskListsElement extends HTMLElement {
 
       this.dispatchEvent(
         new CustomEvent('task-lists-check', {
+          bubbles: true,
           detail: {
             position: position(checkbox),
             checked: checkbox.checked
@@ -207,6 +208,7 @@ function onSorted({src, dst}) {
 
   container.dispatchEvent(
     new CustomEvent('task-lists-move', {
+      bubbles: true,
       detail: {
         src: [lists.indexOf(src.list), src.index],
         dst: [lists.indexOf(dst.list), dst.index]
