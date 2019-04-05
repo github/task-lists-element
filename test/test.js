@@ -69,7 +69,7 @@ describe('task-lists element', function() {
       let called = false
 
       const list = document.querySelector('task-lists')
-      list.addEventListener('task-lists:check', function(event) {
+      list.addEventListener('task-lists-check', function(event) {
         called = true
         const {position, checked} = event.detail
         assert.deepEqual(position, [1, 1])
@@ -87,7 +87,7 @@ describe('task-lists element', function() {
       let called = false
 
       const list = document.querySelector('task-lists')
-      list.addEventListener('task-lists:check', function(event) {
+      list.addEventListener('task-lists-check', function(event) {
         called = true
         const {position, checked} = event.detail
         assert.deepEqual(position, [4, 0])

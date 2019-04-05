@@ -45,12 +45,12 @@ import '@github/task-lists-element'
 ```js
 const list = document.querySelector('task-lists')
 
-list.addEventListener('task-lists:check', function(event) {
+list.addEventListener('task-lists-check', function(event) {
   const {position, checked} = event.detail
   console.log(position, checked)
 })
 
-list.addEventListener('task-lists:move', function(event) {
+list.addEventListener('task-lists-move', function(event) {
   const {src, dst} = event.detail
   console.log(src, dst)
 })

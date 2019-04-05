@@ -62,12 +62,12 @@
   <pre class="events"></pre>
   <script type="text/javascript">
     const events = document.querySelector('.events')
-    document.addEventListener('task-lists:check', function(event) {
-      events.append(`task-lists:check - checked: ${event.detail.checked}, position: ${event.detail.position}\n`)
+    document.addEventListener('task-lists-check', function(event) {
+      events.append(`task-lists-check - checked: ${event.detail.checked}, position: ${event.detail.position}\n`)
     })
 
-    document.addEventListener('task-lists:move', function(event) {
-      events.append(`task-lists:move - from: ${event.detail.src}, to: ${event.detail.dst}\n`)
+    document.addEventListener('task-lists-move', function(event) {
+      events.append(`task-lists-move - from: ${event.detail.src}, to: ${event.detail.dst}\n`)
     })
   </script>
 </body>
