@@ -8,7 +8,7 @@ export default class TaskListsElement extends HTMLElement {
   constructor() {
     super()
 
-    this.addEventListener('change', event => {
+    this.addEventListener('change', (event: Event) => {
       const checkbox = event.target
       if (!(checkbox instanceof HTMLInputElement)) return
       if (!checkbox.classList.contains('task-list-item-checkbox')) return
