@@ -96,11 +96,11 @@ function initItem(el: HTMLElement) {
   if (initialized.get(el)) return
   initialized.set(el, true)
 
-  const taskList = el.closest('task-lists')
-  if (!(taskList instanceof TaskListsElement)) return
+  const currentTaskList = el.closest('task-lists')
+  if (!(currentTaskList instanceof TaskListsElement)) return
 
   // Single item task lists are not draggable.
-  if (taskList.querySelectorAll('.task-list-item').length <= 1) return
+  if (currentTaskList.querySelectorAll('.task-list-item').length <= 1) return
 
   const fragment = handleTemplate.content.cloneNode(true)
   const handle = fragment.querySelector('.handle')
