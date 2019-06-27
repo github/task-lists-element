@@ -8,7 +8,7 @@ export default class TaskListsElement extends HTMLElement {
   constructor() {
     super()
 
-    this.addEventListener('change', event => {
+    this.addEventListener('change', (event: Event) => {
       const checkbox = event.target
       if (!(checkbox instanceof HTMLInputElement)) return
       if (!checkbox.classList.contains('task-list-item-checkbox')) return
@@ -96,11 +96,11 @@ function initItem(el: HTMLElement) {
   if (initialized.get(el)) return
   initialized.set(el, true)
 
-  const taskList = el.closest('task-lists')
-  if (!(taskList instanceof TaskListsElement)) return
+  const currentTaskList = el.closest('task-lists')
+  if (!(currentTaskList instanceof TaskListsElement)) return
 
   // Single item task lists are not draggable.
-  if (taskList.querySelectorAll('.task-list-item').length <= 1) return
+  if (currentTaskList.querySelectorAll('.task-list-item').length <= 1) return
 
   const fragment = handleTemplate.content.cloneNode(true)
   const handle = fragment.querySelector('.handle')
