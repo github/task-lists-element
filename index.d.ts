@@ -5,6 +5,6 @@ export default class TaskListsElement extends HTMLElement {
 
 declare global {
   interface Window {
-    TaskListsElement: TaskListsElement
+    TaskListsElement: typeof TaskListsElement
   }
 }
