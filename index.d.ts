@@ -7,4 +7,7 @@ declare global {
   interface Window {
     TaskListsElement: typeof TaskListsElement
   }
+  interface HTMLElementTagNameMap {
+    'task-lists': TaskListsElement
+  }
 }
