@@ -10,9 +10,21 @@ $ npm install --save @github/task-lists-element
 
 ## Usage
 
+### Script
+
+Import as ES modules:
+
 ```js
 import '@github/task-lists-element'
 ```
+
+With a script tag:
+
+```html
+<script type="module" src="./node_modules/@github/task-lists-element/dist/index.js">
+```
+
+### Markup
 
 ```html
 <task-lists sortable>
