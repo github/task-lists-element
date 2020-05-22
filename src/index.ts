@@ -5,6 +5,9 @@ declare global {
   interface Window {
     TaskListsElement: typeof TaskListsElement
   }
+  interface HTMLElementTagNameMap {
+    'task-lists': TaskListsElement
+  }
 }
 
 if (!window.customElements.get('task-lists')) {
