@@ -21,7 +21,7 @@ export function isDragging(): boolean {
   return !!state
 }
 
-export function sortable(el: HTMLElement, sortStarted: SortStartHandler, sortFinished: SortEndHandler) {
+export function sortable(el: HTMLElement, sortStarted: SortStartHandler, sortFinished: SortEndHandler): void {
   sortHandlers.set(el, {sortStarted, sortFinished})
   el.addEventListener('dragstart', onDragStart)
   el.addEventListener('dragenter', onDragEnter)
