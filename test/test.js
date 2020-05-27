@@ -1,19 +1,19 @@
-describe('task-lists element', function() {
-  describe('element creation', function() {
-    it('creates from document.createElement', function() {
+describe('task-lists element', function () {
+  describe('element creation', function () {
+    it('creates from document.createElement', function () {
       const el = document.createElement('task-lists')
       assert.equal('TASK-LISTS', el.nodeName)
       assert(el instanceof window.TaskListsElement)
     })
 
-    it('creates from constructor', function() {
+    it('creates from constructor', function () {
       const el = new window.TaskListsElement()
       assert.equal('TASK-LISTS', el.nodeName)
     })
   })
 
-  describe('selecting checkboxes', function() {
-    beforeEach(function() {
+  describe('selecting checkboxes', function () {
+    beforeEach(function () {
       const container = document.createElement('div')
       container.innerHTML = `
         <task-lists>
@@ -61,15 +61,15 @@ describe('task-lists element', function() {
       document.body.append(container)
     })
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.innerHTML = ''
     })
 
-    it('emits check event with position', function() {
+    it('emits check event with position', function () {
       let called = false
 
       const list = document.querySelector('task-lists')
-      list.addEventListener('task-lists-check', function(event) {
+      list.addEventListener('task-lists-check', function (event) {
         called = true
         const {position, checked} = event.detail
         assert.deepEqual(position, [1, 1])
@@ -83,11 +83,11 @@ describe('task-lists element', function() {
       assert(called)
     })
 
-    it('emits check event with the right position for nested task list item', function() {
+    it('emits check event with the right position for nested task list item', function () {
       let called = false
 
       const list = document.querySelector('task-lists')
-      list.addEventListener('task-lists-check', function(event) {
+      list.addEventListener('task-lists-check', function (event) {
         called = true
         const {position, checked} = event.detail
         assert.deepEqual(position, [4, 0])

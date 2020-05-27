@@ -1,6 +1,4 @@
-/* @flow strict */
-
-import {isDragging, sortable} from './sortable'
+import {SortEndArgs, isDragging, sortable} from './sortable'
 
 const observers = new WeakMap()
 
@@ -66,7 +64,7 @@ export default class TaskListsElement extends HTMLElement {
     }
   }
 
-  static get observedAttributes(): Array<string> {
+  static get observedAttributes(): string[] {
     return ['disabled']
   }
 
@@ -103,7 +101,7 @@ function initItem(el: HTMLElement) {
   if (currentTaskList.querySelectorAll('.task-list-item').length <= 1) return
 
   const fragment = handleTemplate.content.cloneNode(true)
-  const handle = fragment.querySelector('.handle')
+  const handle = (fragment as DocumentFragment).querySelector<HTMLElement>('.handle')
   el.prepend(fragment)
 
   if (!handle) throw new Error('handle not found')
@@ -139,12 +137,13 @@ function onListItemMouseOut(event: MouseEvent) {
 function position(checkbox: HTMLInputElement): [number, number] {
   const list = taskList(checkbox)
   if (!list) throw new Error('.contains-task-list not found')
-  const index = Array.from(list.children).indexOf(checkbox.closest('.task-list-item'))
+  const item = checkbox.closest('.task-list-item')
+  const index = item ? Array.from(list.children).indexOf(item) : -1
   return [listIndex(list), index]
 }
 
 // Finds the list item's parent task list.
-function taskList(el: Element): ?Element {
+function taskList(el: Element): Element | null {
   const parent = el.parentElement
   return parent ? parent.closest('.contains-task-list') : null
 }
@@ -155,13 +154,13 @@ function isRootTaskList(el: Element): boolean {
 }
 
 // Finds the highest task list in this element's ancestor chain.
-function rootTaskList(node: Element): ?Element {
+function rootTaskList(node: Element): Element | null {
   const list = taskList(node)
   return list ? rootTaskList(list) || list : null
 }
 
 function syncState(list: TaskListsElement) {
-  const items = list.querySelectorAll('.contains-task-list > .task-list-item')
+  const items = list.querySelectorAll<HTMLElement>('.contains-task-list > .task-list-item')
   for (const el of items) {
     if (isRootTaskList(el)) {
       initItem(el)
@@ -198,7 +197,7 @@ function onSortStart(srcList: Element) {
   originalLists.set(container, Array.from(container.querySelectorAll('ol, ul')))
 }
 
-function onSorted({src, dst}) {
+function onSorted({src, dst}: SortEndArgs) {
   const container = src.list.closest('task-lists')
   if (!container) return
 

@@ -1,28 +1,27 @@
-/* @flow strict */
+export interface SortEndArgs {
+  src: {list: Element; index: number}
+  dst: {list: Element; index: number}
+}
+type SortStartHandler = (srcList: Element) => unknown
+type SortEndHandler = (srcOrDst: SortEndArgs) => unknown
 
-type SortStartHandler = (srcList: Element) => mixed
-type SortEndHandler = ({
-  src: {list: Element, index: number},
-  dst: {list: Element, index: number}
-}) => mixed
-
-type DragState = {
-  didDrop: boolean,
-  dragging: Element,
-  dropzone: Element,
-  sourceList: Element,
-  sourceSibling: ?Element,
+interface DragState {
+  didDrop: boolean
+  dragging: Element
+  dropzone: Element
+  sourceList: Element
+  sourceSibling: Element | null
   sourceIndex: number
 }
 
 const sortHandlers = new WeakMap()
-let state: ?DragState = null
+let state: DragState | null = null
 
 export function isDragging(): boolean {
   return !!state
 }
 
-export function sortable(el: Element, sortStarted: SortStartHandler, sortFinished: SortEndHandler) {
+export function sortable(el: HTMLElement, sortStarted: SortStartHandler, sortFinished: SortEndHandler): void {
   sortHandlers.set(el, {sortStarted, sortFinished})
   el.addEventListener('dragstart', onDragStart)
   el.addEventListener('dragenter', onDragEnter)
@@ -34,7 +33,7 @@ export function sortable(el: Element, sortStarted: SortStartHandler, sortFinishe
 // Determine if item2 is before item1 in the tree.
 function isBefore(item1: Element, item2: Element): boolean {
   if (item1.parentNode === item2.parentNode) {
-    let node = item1
+    let node: Element | null = item1
     while (node) {
       if (node === item2) return true
       node = node.previousElementSibling
@@ -61,7 +60,7 @@ function onDragStart(event: DragEvent) {
 
   // Add data to drag operation (required for Firefox).
   if (event.dataTransfer) {
-    event.dataTransfer.setData('text/plain', target.textContent.trim())
+    event.dataTransfer.setData('text/plain', (target.textContent || '').trim())
   }
 
   if (!target.parentElement) return
