@@ -1,6 +1,6 @@
 {
   "globals": {
-    "TaskListsElement": "readable"
+    "TaskListsElement": "readonly"
   },
   "extends": [
     "plugin:github/recommended",
