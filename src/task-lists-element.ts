@@ -25,7 +25,7 @@ export default class TaskListsElement extends HTMLElement {
     observers.set(this, new MutationObserver(syncState.bind(null, this)))
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const observer = observers.get(this)
     if (observer) {
       observer.observe(this, {childList: true, subtree: true})
@@ -33,7 +33,7 @@ export default class TaskListsElement extends HTMLElement {
     syncState(this)
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     const observer = observers.get(this)
     if (observer) {
       observer.disconnect()
@@ -68,7 +68,7 @@ export default class TaskListsElement extends HTMLElement {
     return ['disabled']
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
     if (oldValue === newValue) return
 
     switch (name) {
