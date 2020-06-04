@@ -12,7 +12,7 @@ $ npm install --save @github/task-lists-element
 
 ### Script
 
-Import as a modules:
+Import as a module:
 
 ```js
 import '@github/task-lists-element'
