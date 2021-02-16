@@ -82,8 +82,8 @@ export default class TaskListsElement extends HTMLElement {
 const handleTemplate = document.createElement('template')
 handleTemplate.innerHTML = `
   <span class="handle">
-    <svg class="drag-handle" aria-hidden="true" width="16" height="15" version="1.1" viewBox="0 0 16 15">
-      <path d="M12,4V5H4V4h8ZM4,8h8V7H4V8Zm0,3h8V10H4v1Z"></path>
+    <svg class="drag-handle" aria-hidden="true" width="16" height="16">
+      <path d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z"/>
     </svg>
   </span>`
 
