@@ -3,10 +3,7 @@ import {SortEndArgs, isDragging, sortable} from './sortable'
 const observers = new WeakMap()
 
 export default class TaskListsElement extends HTMLElement {
-  // eslint-disable-next-line custom-elements/no-constructor
-  constructor() {
-    super()
-
+  connectedCallback(): void {
     this.addEventListener('change', (event: Event) => {
       const checkbox = event.target
       if (!(checkbox instanceof HTMLInputElement)) return
@@ -23,14 +20,10 @@ export default class TaskListsElement extends HTMLElement {
       )
     })
 
-    observers.set(this, new MutationObserver(syncState.bind(null, this)))
-  }
+    const observer = new MutationObserver(syncState.bind(null, this))
+    observers.set(this, observer)
 
-  connectedCallback(): void {
-    const observer = observers.get(this)
-    if (observer) {
-      observer.observe(this, {childList: true, subtree: true})
-    }
+    observer.observe(this, {childList: true, subtree: true})
     syncState(this)
   }
 
