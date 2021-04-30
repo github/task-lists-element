@@ -3,6 +3,7 @@ import {SortEndArgs, isDragging, sortable} from './sortable'
 const observers = new WeakMap()
 
 export default class TaskListsElement extends HTMLElement {
+  // eslint-disable-next-line custom-elements/no-constructor
   constructor() {
     super()
 
@@ -243,4 +244,18 @@ function onHandleMouseOut(event: MouseEvent) {
   if (!item) return
 
   item.setAttribute('draggable', 'false')
+}
+
+declare global {
+  interface Window {
+    TaskListsElement: typeof TaskListsElement
+  }
+  interface HTMLElementTagNameMap {
+    'task-lists': TaskListsElement
+  }
+}
+
+if (!window.customElements.get('task-lists')) {
+  window.TaskListsElement = TaskListsElement
+  window.customElements.define('task-lists', TaskListsElement)
 }

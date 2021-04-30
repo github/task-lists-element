@@ -1,74 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <!-- <script type="module" src="../dist/index.js"></script> -->
-  <script type="module" src="https://unpkg.com/@github/task-lists-element@latest"></script>
-  <title>task-lists-element demo</title>
-</head>
-<body>
-  <task-lists sortable>
-    <ul class="contains-task-list">
-      <li class="task-list-item">
-        <label>
-          <input type="checkbox" class="task-list-item-checkbox">
-          Hubot
-        </label>
-      </li>
-      <li class="task-list-item">
-        <label>
-          <input type="checkbox" class="task-list-item-checkbox">
-          Bender
-        </label>
-      </li>
-    </ul>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <script type="module" src="../dist/task-lists-element.js"></script> -->
+    <script type="module" src="https://unpkg.com/@github/task-lists-element@latest"></script>
+    <title>task-lists-element demo</title>
+  </head>
+  <body>
+    <task-lists sortable>
+      <ul class="contains-task-list">
+        <li class="task-list-item">
+          <label>
+            <input type="checkbox" class="task-list-item-checkbox" />
+            Hubot
+          </label>
+        </li>
+        <li class="task-list-item">
+          <label>
+            <input type="checkbox" class="task-list-item-checkbox" />
+            Bender
+          </label>
+        </li>
+      </ul>
 
-    <ul>
-      <li>
-        Nested
+      <ul>
+        <li>
+          Nested
 
-        <ul class="contains-task-list">
-          <li class="task-list-item">
-            <label>
-              <input type="checkbox" class="task-list-item-checkbox">
-              WALL-E
-            </label>
-          </li>
-          <li class="task-list-item">
-            <label>
-              <input type="checkbox" class="task-list-item-checkbox">
-              R2-D2
-            </label>
+          <ul class="contains-task-list">
+            <li class="task-list-item">
+              <label>
+                <input type="checkbox" class="task-list-item-checkbox" />
+                WALL-E
+              </label>
+            </li>
+            <li class="task-list-item">
+              <label>
+                <input type="checkbox" class="task-list-item-checkbox" />
+                R2-D2
+              </label>
 
-            <ul class="contains-task-list">
-              <li class="task-list-item">
-                <label>
-                  <input type="checkbox" class="task-list-item-checkbox">
-                  Baymax
-                </label>
-              </li>
-            </ul>
-          </li>
-          <li class="task-list-item">
-            <label>
-              <input type="checkbox" class="task-list-item-checkbox">
-              BB-8
-            </label>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </task-lists>
-  <pre class="events"></pre>
-  <script type="text/javascript">
-    const events = document.querySelector('.events')
-    document.addEventListener('task-lists-check', function(event) {
-      events.append(`task-lists-check - checked: ${event.detail.checked}, position: ${event.detail.position}\n`)
-    })
+              <ul class="contains-task-list">
+                <li class="task-list-item">
+                  <label>
+                    <input type="checkbox" class="task-list-item-checkbox" />
+                    Baymax
+                  </label>
+                </li>
+              </ul>
+            </li>
+            <li class="task-list-item">
+              <label>
+                <input type="checkbox" class="task-list-item-checkbox" />
+                BB-8
+              </label>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </task-lists>
+    <pre class="events"></pre>
+    <script type="text/javascript">
+      const events = document.querySelector('.events')
+      document.addEventListener('task-lists-check', function (event) {
+        events.append(`task-lists-check - checked: ${event.detail.checked}, position: ${event.detail.position}\n`)
+      })
 
-    document.addEventListener('task-lists-move', function(event) {
-      events.append(`task-lists-move - from: ${event.detail.src}, to: ${event.detail.dst}\n`)
-    })
-  </script>
-</body>
+      document.addEventListener('task-lists-move', function (event) {
+        events.append(`task-lists-move - from: ${event.detail.src}, to: ${event.detail.dst}\n`)
+      })
+    </script>
+  </body>
 </html>

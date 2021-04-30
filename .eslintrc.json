@@ -1,10 +1,16 @@
 {
+  "root": true,
+  "plugins": ["custom-elements"],
   "globals": {
     "TaskListsElement": "readonly"
   },
   "extends": [
     "plugin:github/recommended",
     "plugin:github/browser",
-    "plugin:github/typescript"
-  ]
+    "plugin:github/typescript",
+    "plugin:custom-elements/recommended"
+  ],
+  "rules": {
+    "custom-elements/tag-name-matches-class": ["error", {"suffix": "Element"}]
+  }
 }
