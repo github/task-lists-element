@@ -244,3 +244,17 @@ function onHandleMouseOut(event: MouseEvent) {
 
   item.setAttribute('draggable', 'false')
 }
+
+declare global {
+  interface Window {
+    TaskListsElement: typeof TaskListsElement
+  }
+  interface HTMLElementTagNameMap {
+    'task-lists': TaskListsElement
+  }
+}
+
+if (!window.customElements.get('task-lists')) {
+  window.TaskListsElement = TaskListsElement
+  window.customElements.define('task-lists', TaskListsElement)
+}

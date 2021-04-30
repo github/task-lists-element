@@ -3,10 +3,10 @@
   "version": "2.0.0",
   "description": "Drag and drop task list items.",
   "repository": "github/task-lists-element",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/task-lists-element.js",
+  "module": "dist/task-lists-element.js",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/task-lists-element.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "eslint . --ext .js,.ts && tsc --noEmit",

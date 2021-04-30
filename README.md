@@ -21,7 +21,7 @@ import '@github/task-lists-element'
 With a script tag:
 
 ```html
-<script type="module" src="./node_modules/@github/task-lists-element/dist/index.js">
+<script type="module" src="./node_modules/@github/task-lists-element/dist/task-lists-element.js">
 ```
 
 ### Markup
