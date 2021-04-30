@@ -3,6 +3,7 @@ import {SortEndArgs, isDragging, sortable} from './sortable'
 const observers = new WeakMap()
 
 export default class TaskListsElement extends HTMLElement {
+  // eslint-disable-next-line custom-elements/no-constructor
   constructor() {
     super()
 

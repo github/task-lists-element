@@ -9,5 +9,8 @@
     "plugin:github/browser",
     "plugin:github/typescript",
     "plugin:custom-elements/recommended"
-  ]
+  ],
+  "rules": {
+    "custom-elements/tag-name-matches-class": ["error", {"suffix": "Element"}]
+  }
 }
