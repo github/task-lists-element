@@ -1,10 +1,13 @@
 {
+  "root": true,
+  "plugins": ["custom-elements"],
   "globals": {
     "TaskListsElement": "readonly"
   },
   "extends": [
     "plugin:github/recommended",
     "plugin:github/browser",
-    "plugin:github/typescript"
+    "plugin:github/typescript",
+    "plugin:custom-elements/recommended"
   ]
 }
