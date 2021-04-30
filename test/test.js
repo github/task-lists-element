@@ -19,19 +19,19 @@ describe('task-lists element', function () {
         <task-lists>
           <ul class="contains-task-list">
             <li>
-              <input type="checkbox" class="task-list-item-checkbox"> Hubot
+              <input type="checkbox"> Hubot
             </li>
             <li>
-              <input type="checkbox" class="task-list-item-checkbox"> Bender
+              <input type="checkbox"> Bender
             </li>
           </ul>
 
           <ul class="contains-task-list">
             <li>
-              <input type="checkbox" class="task-list-item-checkbox"> BB-8
+              <input type="checkbox"> BB-8
             </li>
             <li>
-              <input id="wall-e" type="checkbox" class="task-list-item-checkbox"> WALL-E
+              <input id="wall-e" type="checkbox"> WALL-E
             </li>
           </ul>
 
@@ -41,14 +41,14 @@ describe('task-lists element', function () {
               <ul class="contains-task-list">
                 <li>
                   <label>
-                    <input type="checkbox" class="task-list-item-checkbox">
+                    <input type="checkbox">
                     R2-D2
                   </label>
 
                   <ul class="contains-task-list">
                     <li>
                       <label>
-                        <input id="baymax" type="checkbox" class="task-list-item-checkbox">
+                        <input id="baymax" type="checkbox">
                         Baymax
                       </label>
                     </li>

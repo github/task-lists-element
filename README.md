@@ -30,22 +30,22 @@ With a script tag:
 <task-lists sortable>
   <ul class="contains-task-list">
     <li>
-      <input type="checkbox" class="task-list-item-checkbox" />
+      <input type="checkbox" />
       Hubot
     </li>
     <li>
-      <input type="checkbox" class="task-list-item-checkbox" />
+      <input type="checkbox" />
       Bender
     </li>
   </ul>
 
   <ul class="contains-task-list">
     <li>
-      <input type="checkbox" class="task-list-item-checkbox" />
+      <input type="checkbox" />
       BB-8
     </li>
     <li>
-      <input type="checkbox" class="task-list-item-checkbox" />
+      <input type="checkbox" />
       WALL-E
     </li>
   </ul>

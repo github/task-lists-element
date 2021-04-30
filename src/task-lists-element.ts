@@ -10,7 +10,6 @@ export default class TaskListsElement extends HTMLElement {
     this.addEventListener('change', (event: Event) => {
       const checkbox = event.target
       if (!(checkbox instanceof HTMLInputElement)) return
-      if (!checkbox.classList.contains('task-list-item-checkbox')) return
 
       this.dispatchEvent(
         new CustomEvent('task-lists-check', {
@@ -174,7 +173,7 @@ function syncDisabled(list: TaskListsElement) {
   for (const el of list.querySelectorAll('li')) {
     el.classList.toggle('enabled', !list.disabled)
   }
-  for (const el of list.querySelectorAll('.task-list-item-checkbox')) {
+  for (const el of list.querySelectorAll('li input[type="checkbox"]')) {
     if (el instanceof HTMLInputElement) {
       el.disabled = list.disabled
     }
