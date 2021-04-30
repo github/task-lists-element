@@ -18,19 +18,19 @@ describe('task-lists element', function () {
       container.innerHTML = `
         <task-lists>
           <ul class="contains-task-list">
-            <li class="task-list-item">
+            <li>
               <input type="checkbox" class="task-list-item-checkbox"> Hubot
             </li>
-            <li class="task-list-item">
+            <li>
               <input type="checkbox" class="task-list-item-checkbox"> Bender
             </li>
           </ul>
 
           <ul class="contains-task-list">
-            <li class="task-list-item">
+            <li>
               <input type="checkbox" class="task-list-item-checkbox"> BB-8
             </li>
-            <li class="task-list-item">
+            <li>
               <input id="wall-e" type="checkbox" class="task-list-item-checkbox"> WALL-E
             </li>
           </ul>
@@ -39,14 +39,14 @@ describe('task-lists element', function () {
             <li>
               Nested
               <ul class="contains-task-list">
-                <li class="task-list-item">
+                <li>
                   <label>
                     <input type="checkbox" class="task-list-item-checkbox">
                     R2-D2
                   </label>
 
                   <ul class="contains-task-list">
-                    <li class="task-list-item">
+                    <li>
                       <label>
                         <input id="baymax" type="checkbox" class="task-list-item-checkbox">
                         Baymax

@@ -29,23 +29,23 @@ With a script tag:
 ```html
 <task-lists sortable>
   <ul class="contains-task-list">
-    <li class="task-list-item">
-      <input type="checkbox" class="task-list-item-checkbox">
+    <li>
+      <input type="checkbox" class="task-list-item-checkbox" />
       Hubot
     </li>
-    <li class="task-list-item">
-      <input type="checkbox" class="task-list-item-checkbox">
+    <li>
+      <input type="checkbox" class="task-list-item-checkbox" />
       Bender
     </li>
   </ul>
 
   <ul class="contains-task-list">
-    <li class="task-list-item">
-      <input type="checkbox" class="task-list-item-checkbox">
+    <li>
+      <input type="checkbox" class="task-list-item-checkbox" />
       BB-8
     </li>
-    <li class="task-list-item">
-      <input type="checkbox" class="task-list-item-checkbox">
+    <li>
+      <input type="checkbox" class="task-list-item-checkbox" />
       WALL-E
     </li>
   </ul>
@@ -57,12 +57,12 @@ With a script tag:
 ```js
 const list = document.querySelector('task-lists')
 
-list.addEventListener('task-lists-check', function(event) {
+list.addEventListener('task-lists-check', function (event) {
   const {position, checked} = event.detail
   console.log(position, checked)
 })
 
-list.addEventListener('task-lists-move', function(event) {
+list.addEventListener('task-lists-move', function (event) {
   const {src, dst} = event.detail
   console.log(src, dst)
 })

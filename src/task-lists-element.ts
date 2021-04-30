@@ -99,7 +99,7 @@ function initItem(el: HTMLElement) {
   if (!(currentTaskList instanceof TaskListsElement)) return
 
   // Single item task lists are not draggable.
-  if (currentTaskList.querySelectorAll('.task-list-item').length <= 1) return
+  if (currentTaskList.querySelectorAll('li').length <= 1) return
 
   const fragment = handleTemplate.content.cloneNode(true)
   const handle = (fragment as DocumentFragment).querySelector<HTMLElement>('.handle')
@@ -138,7 +138,7 @@ function onListItemMouseOut(event: MouseEvent) {
 function position(checkbox: HTMLInputElement): [number, number] {
   const list = taskList(checkbox)
   if (!list) throw new Error('.contains-task-list not found')
-  const item = checkbox.closest('.task-list-item')
+  const item = checkbox.closest('li')
   const index = item ? Array.from(list.children).indexOf(item) : -1
   return [listIndex(list), index]
 }
@@ -161,7 +161,7 @@ function rootTaskList(node: Element): Element | null {
 }
 
 function syncState(list: TaskListsElement) {
-  const items = list.querySelectorAll<HTMLElement>('.contains-task-list > .task-list-item')
+  const items = list.querySelectorAll<HTMLElement>('.contains-task-list > li')
   for (const el of items) {
     if (isRootTaskList(el)) {
       initItem(el)
@@ -171,7 +171,7 @@ function syncState(list: TaskListsElement) {
 }
 
 function syncDisabled(list: TaskListsElement) {
-  for (const el of list.querySelectorAll('.task-list-item')) {
+  for (const el of list.querySelectorAll('li')) {
     el.classList.toggle('enabled', !list.disabled)
   }
   for (const el of list.querySelectorAll('.task-list-item-checkbox')) {
@@ -222,7 +222,7 @@ function onHandleMouseOver(event: MouseEvent) {
   const target = event.currentTarget
   if (!(target instanceof Element)) return
 
-  const item = target.closest('.task-list-item')
+  const item = target.closest('li')
   if (!item) return
 
   const list = item.closest('task-lists')
@@ -240,7 +240,7 @@ function onHandleMouseOut(event: MouseEvent) {
   const target = event.currentTarget
   if (!(target instanceof Element)) return
 
-  const item = target.closest('.task-list-item')
+  const item = target.closest('li')
   if (!item) return
 
   item.setAttribute('draggable', 'false')
