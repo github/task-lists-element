@@ -1,9 +1,9 @@
-export interface SortEndArgs {
+export interface SortArgs {
   src: {list: Element; index: number}
   dst: {list: Element; index: number}
 }
-type SortStartHandler = (srcList: Element) => unknown
-type SortEndHandler = (srcOrDst: SortEndArgs) => unknown
+type SortStartHandler = (src: SortArgs) => unknown
+type SortEndHandler = (srcOrDst: SortArgs) => unknown
 
 interface DragState {
   didDrop: boolean
@@ -69,7 +69,8 @@ function onDragStart(event: DragEvent) {
 
   const handlers = sortHandlers.get(target)
   if (handlers) {
-    handlers.sortStarted(sourceList)
+    const src = {list: sourceList, index: sourceIndex}
+    handlers.sortStarted({src})
   }
 
   state = {

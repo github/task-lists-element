@@ -1,4 +1,4 @@
-import {SortEndArgs, isDragging, sortable} from './sortable'
+import {SortArgs, isDragging, sortable} from './sortable'
 
 const observers = new WeakMap()
 
@@ -185,13 +185,23 @@ function listIndex(list: Element): number {
 
 const originalLists = new WeakMap()
 
-function onSortStart(srcList: Element) {
-  const container = srcList.closest('task-lists')
+function onSortStart({src}: SortArgs) {
+  const container = src.list.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  originalLists.set(container, Array.from(container.querySelectorAll('ol, ul')))
+  const lists = Array.from(container.querySelectorAll('ol, ul'))
+  originalLists.set(container, lists)
+
+  container.dispatchEvent(
+    new CustomEvent('task-lists-move-start', {
+      bubbles: true,
+      detail: {
+        src: [lists.indexOf(src.list), src.index]
+      }
+    })
+  )
 }
 
-function onSorted({src, dst}: SortEndArgs) {
+function onSorted({src, dst}: SortArgs) {
   const container = src.list.closest('task-lists')
   if (!container) return
 
