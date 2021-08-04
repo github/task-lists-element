@@ -132,7 +132,8 @@ function position(checkbox: HTMLInputElement): [number, number] {
   const list = taskList(checkbox)
   if (!list) throw new Error('.contains-task-list not found')
   const item = checkbox.closest('.task-list-item')
-  const index = item ? Array.from(list.children).indexOf(item) : -1
+  const listItems = Array.from(list.children).filter(el => el.classList.contains('task-list-item'))
+  const index = item ? listItems.indexOf(item) : -1
   return [listIndex(list), index]
 }
 
