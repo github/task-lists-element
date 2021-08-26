@@ -57,6 +57,22 @@ describe('task-lists element', function () {
               </ul>
             </li>
           </ol>
+
+          <ul class="contains-task-list">
+            <li class="task-list-item">
+              <label>
+                <input type="checkbox" class="task-list-item-checkbox">
+                R2-D2
+              </label>
+            </li>
+            <li>bam</li>
+            <li class="task-list-item">
+              <label>
+                <input id="c3po" type="checkbox" class="task-list-item-checkbox">
+                C-3PO
+              </label>
+            </li>
+          </ul>
         </task-lists>`
       document.body.append(container)
     })
@@ -95,6 +111,24 @@ describe('task-lists element', function () {
       })
 
       const checkbox = document.querySelector('#baymax')
+      checkbox.checked = true
+      checkbox.dispatchEvent(new CustomEvent('change', {bubbles: true}))
+
+      assert(called)
+    })
+
+    it('emits check event with the right position for mixed task list', function () {
+      let called = false
+
+      const list = document.querySelector('task-lists')
+      list.addEventListener('task-lists-check', function (event) {
+        called = true
+        const {position, checked} = event.detail
+        assert.deepEqual(position, [5, 2])
+        assert(checked)
+      })
+
+      const checkbox = document.querySelector('#c3po')
       checkbox.checked = true
       checkbox.dispatchEvent(new CustomEvent('change', {bubbles: true}))
 
