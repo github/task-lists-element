@@ -12,5 +12,13 @@
   ],
   "rules": {
     "custom-elements/tag-name-matches-class": ["error", {"suffix": "Element"}]
-  }
+  },
+  "overrides": [
+    {
+      "files": "rollup.config.js",
+      "rules": {
+        "filenames/match-regex": "off"
+      }
+    }
+  ]
 }
