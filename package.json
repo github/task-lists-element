@@ -1,6 +1,6 @@
 {
   "name": "@github/task-lists-element",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Drag and drop task list items.",
   "repository": "github/task-lists-element",
   "main": "dist/task-lists-element.js",
