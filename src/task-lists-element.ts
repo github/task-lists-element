@@ -175,13 +175,19 @@ function syncDisabled(list: TaskListsElement) {
   }
 }
 
+function queryLists(container: Element) {
+  return Array.from(container.querySelectorAll('ol, ul')).filter(list => {
+    return !list.closest('tracking-block')
+  })
+}
+
 // Given a top-level task list, return its index location in the container. All
 // lists in the container, not just task lists, are indexed to match the
 // server-side Markdown parser's indexing.
 function listIndex(list: Element): number {
   const container = list.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  return Array.from(container.querySelectorAll('ol, ul')).indexOf(list)
+  return queryLists(container).indexOf(list)
 }
 
 const originalLists = new WeakMap()
@@ -189,7 +195,7 @@ const originalLists = new WeakMap()
 function onSortStart(srcList: Element) {
   const container = srcList.closest('task-lists')
   if (!container) throw new Error('parent not found')
-  originalLists.set(container, Array.from(container.querySelectorAll('ol, ul')))
+  originalLists.set(container, queryLists(container))
 }
 
 function onSorted({src, dst}: SortEndArgs) {
