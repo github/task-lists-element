@@ -74,18 +74,24 @@ export default class TaskListsElement extends HTMLElement {
 }
 
 const handleTemplate = document.createElement('template')
-const span = handleTemplate.content.appendChild(document.createElement('span'))
+const span = document.createElement('span')
 span.classList.add('handle')
-const svg = span.appendChild(document.createElement('svg'))
+
+const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
 svg.classList.add('drag-handle')
 svg.setAttribute('aria-hidden', 'true')
 svg.setAttribute('width', '16')
 svg.setAttribute('height', '16')
-const path = svg.appendChild(document.createElement('path'))
+
+const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 path.setAttribute(
   'd',
   'M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2zm1-5a1 1 0 11-2 0 1 1 0 012 0zM6 5a1 1 0 100-2 1 1 0 000 2z'
 )
+
+handleTemplate.content.appendChild(span)
+span.appendChild(svg)
+svg.appendChild(path)
 
 const initialized = new WeakMap()
 
