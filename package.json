@@ -39,7 +39,7 @@
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "mocha": "^10.2.0",
-    "rollup": "^2.56.3",
+    "rollup": "^3.29.5",
     "rollup-plugin-babel": "^4.4.0",
     "typescript": "^4.4.2"
   },
