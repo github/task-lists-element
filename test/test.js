@@ -15,6 +15,7 @@ describe('task-lists element', function () {
   describe('selecting checkboxes', function () {
     beforeEach(function () {
       const container = document.createElement('div')
+      // eslint-disable-next-line github/no-inner-html
       container.innerHTML = `
         <task-lists>
           <ul class="contains-task-list">
@@ -78,6 +79,7 @@ describe('task-lists element', function () {
     })
 
     afterEach(function () {
+      // eslint-disable-next-line github/no-inner-html
       document.body.innerHTML = ''
     })
 
