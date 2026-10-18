@@ -3,23 +3,24 @@ import {SortEndArgs, isDragging, sortable} from './sortable'
 const observers = new WeakMap()
 
 export default class TaskListsElement extends HTMLElement {
+  handleEvent(event: Event): void {
+    const checkbox = event.target
+    if (!(checkbox instanceof HTMLInputElement)) return
+    if (!checkbox.classList.contains('task-list-item-checkbox')) return
+
+    this.dispatchEvent(
+      new CustomEvent('task-lists-check', {
+        bubbles: true,
+        detail: {
+          position: position(checkbox),
+          checked: checkbox.checked
+        }
+      })
+    )
+  }
+
   connectedCallback(): void {
-    this.addEventListener('change', (event: Event) => {
-      const checkbox = event.target
-      if (!(checkbox instanceof HTMLInputElement)) return
-      if (!checkbox.classList.contains('task-list-item-checkbox')) return
-
-      this.dispatchEvent(
-        new CustomEvent('task-lists-check', {
-          bubbles: true,
-          detail: {
-            position: position(checkbox),
-            checked: checkbox.checked
-          }
-        })
-      )
-    })
-
+    this.addEventListener('change', this)
     const observer = new MutationObserver(syncState.bind(null, this))
     observers.set(this, observer)
 
