@@ -83,6 +83,29 @@ describe('task-lists element', function () {
       document.body.innerHTML = ''
     })
 
+    it('emits one check event per change after reconnecting', function () {
+      const list = document.querySelector('task-lists')
+      const parent = list.parentElement
+      list.remove()
+      parent.append(list)
+      list.remove()
+      parent.append(list)
+      const events = []
+      list.addEventListener('task-lists-check', event => events.push(event.detail))
+      const checkbox = list.querySelector('.task-list-item-checkbox')
+
+      checkbox.checked = true
+      checkbox.dispatchEvent(new Event('change', {bubbles: true}))
+      assert.deepEqual(events, [{position: [0, 0], checked: true}])
+
+      checkbox.checked = false
+      checkbox.dispatchEvent(new Event('change', {bubbles: true}))
+      assert.deepEqual(events, [
+        {position: [0, 0], checked: true},
+        {position: [0, 0], checked: false}
+      ])
+    })
+
     it('emits check event with position', function () {
       let called = false
 
